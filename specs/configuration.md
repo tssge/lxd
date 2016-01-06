@@ -55,6 +55,7 @@ The currently supported keys are:
 
 Key                             | Type          | Default           | Description
 :--                             | :---          | :------           | :----------
+rootfs.options                  | string        | -                 | Specify additional mount options separated by comma (,). Currently applies to LVM only.
 boot.autostart                  | boolean       | false             | Always start the container when LXD starts
 boot.autostart.delay            | integer       | 0                 | Number of seconds to wait after the container started before starting the next one
 boot.autostart.priority         | integer       | 0                 | What order to start the containers in (starting with highest)

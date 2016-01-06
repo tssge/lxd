@@ -385,7 +385,13 @@ func (s *storageLvm) ContainerCopy(container container, sourceContainer containe
 func (s *storageLvm) ContainerStart(container container) error {
 	lvName := containerNameToLVName(container.Name())
 	lvpath := fmt.Sprintf("/dev/%s/%s", s.vgName, lvName)
-	err := s.tryMount(lvpath, container.Path(), "ext4", 0, "discard")
+	mountOptions := "discard"
+	
+	if options, ok := container.ExpandedConfig()["rootfs.options"]; ok {
+		mountOptions = mountOptions + "," + options
+	}
+	
+	err := s.tryMount(lvpath, container.Path(), "ext4", 0, mountOptions)
 	if err != nil {
 		return fmt.Errorf(
 			"Error mounting snapshot LV path='%s': %v",

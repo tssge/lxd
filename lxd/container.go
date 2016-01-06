@@ -39,6 +39,8 @@ func containerValidName(name string) error {
 
 func containerValidConfigKey(k string) bool {
 	switch k {
+	case "rootfs.options":
+		return true
 	case "boot.autostart":
 		return true
 	case "boot.autostart.delay":
